@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app" class="p-10 max-w-xl m-auto">
+
+      <h1 class="text-6xl text-center mb-5">Path finder</h1>
+
+      <div class="mb-10">
+        <label for="">Fill mode</label>
+        <select id="mode" class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md">
+          <option value="blocks">Blocks</option>
+          <option value="location">Location</option>
+          <option value="target">Target</option>
+        </select>
+
+        <button class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full" id="start">Find</button>
+      </div>
+
+      <div id="grid" class="grid grid-cols-5 border border-black">
+
+      </div>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
