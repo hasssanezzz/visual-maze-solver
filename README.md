@@ -1,3 +1,3 @@
-# Trash maze solver
+# Maze solver
 
-Very slow maze short path finder, using backtracking.
+A maze solving visualzer, using the BFS algorithm.
