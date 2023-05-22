@@ -1,4 +1,4 @@
-import { DELAY, SIZE } from '../constants'
+import { DELAY } from '../constants'
 import { Pair, make2dArray } from '.'
 
 async function sleep(time = DELAY) {
@@ -8,13 +8,14 @@ async function sleep(time = DELAY) {
 export async function getShortestPath(
   start: Pair,
   end: Pair,
-  blocks: boolean[][]
+  blocks: boolean[][],
+  size: number
 ) {
   const dx = [-1, 1, 0, 0]
   const dy = [0, 0, 1, -1]
 
   const isSafe = (x: number, y: number) =>
-    x < SIZE && y < SIZE && x >= 0 && y >= 0 && !blocks[x][y]
+    x < size && y < size && x >= 0 && y >= 0 && !blocks[x][y]
 
   const setBoxColor = (i: number, j: number, color = 'yellow') => {
     if (
@@ -24,20 +25,20 @@ export async function getShortestPath(
       document.getElementById(`c-${i}-${j}`)!.style.backgroundColor = color
   }
 
-  async function bfs(startNode: Pair, endNode: Pair) {
-    const visited: boolean[][] = make2dArray(SIZE, false)
-    const distance: number[][] = make2dArray(SIZE, Number.MAX_SAFE_INTEGER)
+  async function bfs(start: Pair, end: Pair) {
+    const visited: boolean[][] = make2dArray(size, false)
+    const distance: number[][] = make2dArray(size, Number.MAX_SAFE_INTEGER)
     const parent = make2dArray(
-      SIZE,
+      size,
       new Pair(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
     )
 
     let isSolvable = false
 
-    parent[startNode.first][startNode.second] = new Pair(-1, -1)
+    parent[start.first][start.second] = new Pair(-1, -1)
 
     const q: Pair[] = []
-    q.push(startNode)
+    q.push(start)
 
     while (q.length > 0) {
       await sleep()
@@ -48,7 +49,7 @@ export async function getShortestPath(
 
       setBoxColor(p.first, p.second)
 
-      if (p.first === endNode.first && p.second === endNode.second) {
+      if (p.first === end.first && p.second === end.second) {
         isSolvable = true
         break
       }
@@ -69,8 +70,8 @@ export async function getShortestPath(
 
     if (isSolvable) {
       const dq: Pair[] = []
-      let p1 = endNode.first,
-        p2 = endNode.second
+      let p1 = end.first,
+        p2 = end.second
 
       while (p1 != -1 && p1 != Number.MIN_SAFE_INTEGER) {
         dq.unshift(new Pair(p1, p2))

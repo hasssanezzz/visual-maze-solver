@@ -19,20 +19,31 @@
 </head>
 
 <body>
-  <div id="app" class="p-10 max-w-[1224px] m-auto flex sm:flex-row flex-col gap-10">
+  <div id="app" class="p-10 max-w-[1224px] m-auto flex lg:flex-row flex-col gap-10">
 
     <div>
       <h1 class="text-6xl text-center mb-5">Maze solver</h1>
 
-      <div class="mb-10">
-        <label for="">Fill mode</label>
-        <select id="mode" class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md">
-          <option value="blocks">Blocks</option>
-          <option value="location">Location</option>
-          <option value="target">Target</option>
-        </select>
+      <div class="mb-5 space-y-5">
+        <div>
+          <label for="">Fill mode</label>
+          <select id="mode" class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md">
+            <option value="blocks">Blocks</option>
+            <option value="location">Location</option>
+            <option value="target">Target</option>
+          </select>
+          <button class="px-3 py-2 bg-green-600 text-white rounded-md mt-5 w-full" id="start">Find</button>
+        </div>
 
-        <button class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full" id="start">Find</button>
+        <div>
+          <form id="form">
+            <label>Cell count per row</label>
+            <input id="size" type="number" max="40" min="5" value="13" class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md" />
+            <button class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full" id="start">Reset</button>
+          </form>
+        </div>
+
+
 
         <p class="mt-5">🎈 Developed by <a href="https://github.com/hasssanezzz" class="underline text-blue-500">Hassan
             Ezz</a></p>

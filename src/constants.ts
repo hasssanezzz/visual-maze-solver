@@ -1,2 +1,2 @@
-export const SIZE = 13
-export const DELAY = 5
+export const DEFAULT_SIZE = 10
+export const DELAY = 0
