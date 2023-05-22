@@ -1,20 +1,9 @@
-import { SIZE } from './constants'
-import { make2dArray } from './makeArray'
+import { DELAY, SIZE } from '../constants'
+import { Pair, make2dArray } from '.'
 
-export class Pair {
-  first: number
-  second: number
-
-  constructor(first: number, second: number) {
-    this.first = first
-    this.second = second
-  }
-}
-
-async function sleep(time = 10) {
+async function sleep(time = DELAY) {
   await new Promise((r) => setTimeout(r, time))
 }
-
 
 export async function getShortestPath(
   start: Pair,
@@ -28,8 +17,11 @@ export async function getShortestPath(
     x < SIZE && y < SIZE && x >= 0 && y >= 0 && !blocks[x][y]
 
   const setBoxColor = (i: number, j: number, color = 'yellow') => {
-    if((start.first != i || start.second != j) && (end.first != i || end.second != j))
-    document.getElementById(`c-${i}-${j}`)!.style.backgroundColor = color
+    if (
+      (start.first != i || start.second != j) &&
+      (end.first != i || end.second != j)
+    )
+      document.getElementById(`c-${i}-${j}`)!.style.backgroundColor = color
   }
 
   async function bfs(startNode: Pair, endNode: Pair) {

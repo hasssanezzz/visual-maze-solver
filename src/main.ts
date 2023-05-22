@@ -1,9 +1,7 @@
 import { SIZE } from './constants'
-import { Pair, getShortestPath } from './graphTesting'
-import { make2dArray } from './makeArray'
+import { Pair, getShortestPath } from './helpers'
+import { make2dArray } from './helpers'
 import './style.css'
-
-let mat: number[][] = make2dArray(SIZE, 1)
 
 const blocks = make2dArray(SIZE, false)
 
@@ -20,15 +18,15 @@ function main() {
 
   function render() {
     grid!.innerHTML = ''
-    mat.forEach((arr, i) =>
-      arr.forEach((_, j) => {
+    for (let i = 0; i < SIZE; i++) {
+      for (let j = 0; j < SIZE; j++) {
         const isLocation = location.first === i && location.second === j
         const isTarget = target.first === i && target.second === j
         grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box aspect-square border border-black ${
           blocks[i][j] ? 'bg-black' : (isLocation || isTarget) && 'bg-green-600'
         }"></button>`
-      })
-    )
+      }
+    }
 
     document.querySelectorAll('.box').forEach((box) => {
       box.addEventListener('click', () => {

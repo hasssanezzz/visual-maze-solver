@@ -1,1 +1,2 @@
-export const SIZE = 12
+export const SIZE = 13
+export const DELAY = 5
