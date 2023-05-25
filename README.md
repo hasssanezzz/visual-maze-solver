@@ -1,6 +1,6 @@
 # Visual maze solver
 
-A maze solving visualizer, using Dijkstra's algorithm.
+A maze solving visualizer, using the BFS algorithm.
 
 ### Settings
 
