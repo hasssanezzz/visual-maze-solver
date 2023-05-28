@@ -41,6 +41,7 @@ export async function getShortestPath(
     q.push(start)
 
     while (q.length > 0) {
+      // add some delay
       await sleep()
 
       const p = q[0]

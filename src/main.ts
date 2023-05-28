@@ -1,4 +1,4 @@
-import { DEFAULT_SIZE } from './constants'
+import { DEFAULT_SIZE, MAX_SIZE } from './constants'
 import { Pair, getShortestPath } from './helpers'
 import { make2dArray } from './helpers'
 import './style.css'
@@ -23,9 +23,9 @@ function main(size = DEFAULT_SIZE) {
       for (let j = 0; j < size; j++) {
         const isLocation = location.first === i && location.second === j
         const isTarget = target.first === i && target.second === j
-        grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box aspect-square border border-black ${
+        grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box aspect-square text-white font-bold border border-black ${
           blocks[i][j] ? 'bg-black' : (isLocation || isTarget) && 'bg-green-600'
-        }"></button>`
+        }">${isLocation ? "A" : isTarget ? "B" : ""}</button>`
       }
     }
 
@@ -39,6 +39,7 @@ function main(size = DEFAULT_SIZE) {
         const i = +box.getAttribute('i')!,
           j = +box.getAttribute('j')!
 
+        // preventing collision with target and location postions
         if (
           mode === 'blocks' &&
           (location.first !== i || location.second !== j) &&
@@ -49,6 +50,7 @@ function main(size = DEFAULT_SIZE) {
             blocks[i][j] ? 'black' : 'white'
         }
 
+        // preventing collision with blocks and target postions
         if (
           mode === 'location' &&
           !blocks[i][j] &&
@@ -59,6 +61,7 @@ function main(size = DEFAULT_SIZE) {
           render()
         }
 
+        // preventing collision with blocks and location postions
         if (
           mode === 'target' &&
           !blocks[i][j] &&
@@ -80,8 +83,6 @@ function main(size = DEFAULT_SIZE) {
   })
 
   startBtn?.addEventListener('click', async () => {
-    console.log('init')
-
     isSolved = true
     render()
 
@@ -93,8 +94,8 @@ function main(size = DEFAULT_SIZE) {
     )
 
     if (sol) {
-      console.log(sol)
       sol.forEach((pair) => {
+        // preventing location and target from getting colored red
         if (
           (pair.first != target.first || pair.second != target.second) &&
           (pair.first != location.first || pair.second != location.second)
@@ -114,16 +115,18 @@ function main(size = DEFAULT_SIZE) {
 main(DEFAULT_SIZE)
 
 function syncSizeForm() {
-  ;(<HTMLInputElement>document.getElementById('size'))!.value =
-    DEFAULT_SIZE.toString()
+  const input = (<HTMLInputElement>document.getElementById('size'))
+  input.value = DEFAULT_SIZE.toString()
+  input.max = MAX_SIZE.toString()
 
   document.getElementById('form')?.addEventListener('submit', (e) => {
     e.preventDefault()
     const sizeInput = (<HTMLInputElement>document.getElementById('size')).value
 
+
+    // recreate the button to remove event listeners
     let newBtn = startBtn!.cloneNode(true)
     startBtn!.parentNode!.replaceChild(newBtn, startBtn!)
-
     startBtn = newBtn as Element
 
     main(+sizeInput)
