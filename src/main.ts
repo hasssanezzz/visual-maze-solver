@@ -3,6 +3,7 @@ import {
   Pair,
   getShortestPath,
   getShortestPathDijkstra,
+  getShortestPathAstar,
 } from "./helpers";
 import { make2dArray } from "./helpers";
 import "./style.css";
@@ -89,7 +90,15 @@ function main(size = DEFAULT_SIZE) {
   });
   selectAlgorithm!.addEventListener("change", () => {
     solvingAlgorithm = (<HTMLSelectElement>document.getElementById("algorithm"))
-      .value as "bfs" | "dijkstra";
+      .value as "bfs" | "dijkstra" | "astar";
+
+    if (solvingAlgorithm === "astar") {
+      //select
+      document.querySelector("#heuristic")!.classList.remove("hidden");
+      //label
+      document.querySelector("#heuristic-label")!.classList.remove("hidden");
+
+    }
   });
 
   startBtn?.addEventListener("click", async () => {
@@ -97,7 +106,11 @@ function main(size = DEFAULT_SIZE) {
     render();
 
     const selectedAlgorithm =
-      solvingAlgorithm == "bfs" ? getShortestPath : getShortestPathDijkstra;
+      solvingAlgorithm === "bfs"
+        ? getShortestPath
+        : solvingAlgorithm === "dijkstra"
+        ? getShortestPathDijkstra
+        : getShortestPathAstar;
 
     const sol = await selectedAlgorithm(
       new Pair(location.first, location.second),

@@ -1,5 +1,6 @@
 import { getShortestPath } from "./getShortestPath";
 import { getShortestPathDijkstra } from "./getShortestPathDijkstra";
+import { getShortestPathAstar } from "./getShortestPathAstar";
 import { Pair } from "./pair";
 
 export function make2dArray<T>(size: number, fill: T): T[][] {
@@ -8,4 +9,4 @@ export function make2dArray<T>(size: number, fill: T): T[][] {
   return result;
 }
 
-export { getShortestPath, Pair, getShortestPathDijkstra };
+export { getShortestPath, Pair, getShortestPathDijkstra, getShortestPathAstar };
