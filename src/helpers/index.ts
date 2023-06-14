@@ -1,10 +1,11 @@
-import { getShortestPath } from './getShortestPath'
-import { Pair } from './pair'
+import { getShortestPath } from "./getShortestPath";
+import { getShortestPathDijkstra } from "./getShortestPathDijkstra";
+import { Pair } from "./pair";
 
 export function make2dArray<T>(size: number, fill: T): T[][] {
-  const result: T[][] = []
-  for (let i = 0; i < size; i++) result.push(new Array<T>(size).fill(fill))
-  return result
+  const result: T[][] = [];
+  for (let i = 0; i < size; i++) result.push(new Array<T>(size).fill(fill));
+  return result;
 }
 
-export { getShortestPath, Pair }
+export { getShortestPath, Pair, getShortestPathDijkstra };

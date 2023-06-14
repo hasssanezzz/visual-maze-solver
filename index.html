@@ -1,51 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visual maze solver - by Hassan Ezz</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visual maze solver - by Hassan Ezz</title>
-</head>
+  <body>
+    <div
+      id="app"
+      class="p-10 max-w-[1224px] m-auto flex lg:flex-row flex-col gap-10"
+    >
+      <div>
+        <h1 class="text-6xl text-center mb-5">Maze solver</h1>
 
-<body>
-  <div id="app" class="p-10 max-w-[1224px] m-auto flex lg:flex-row flex-col gap-10">
+        <div class="mb-5 space-y-5">
+          <div>
+            <label for="">Fill mode</label>
+            <select
+              id="mode"
+              class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md"
+            >
+              <option value="blocks">Blocks</option>
+              <option value="location">Location</option>
+              <option value="target">Target</option>
+            </select>
+            <div>
+              <label for="algorithm">Solving algorithm:</label>
+              <select
+                id="algorithm"
+                class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md"
+              >
+                <option value="bfs">Breadth-first search</option>
+                <option value="dijkstra">Dijkstra's algorithm</option>
+              </select>
+            </div>
+            <button
+              class="px-3 py-2 bg-green-600 text-white rounded-md mt-5 w-full"
+              id="start"
+            >
+              Find
+            </button>
+          </div>
 
-    <div>
-      <h1 class="text-6xl text-center mb-5">Maze solver</h1>
+          <div>
+            <form id="form">
+              <label>Cell count per row</label>
+              <input
+                id="size"
+                type="number"
+                max="30"
+                min="5"
+                value="13"
+                class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md"
+              />
+              <button
+                class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full"
+                id="start"
+              >
+                Reset
+              </button>
+            </form>
+          </div>
 
-      <div class="mb-5 space-y-5">
-        <div>
-          <label for="">Fill mode</label>
-          <select id="mode" class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md">
-            <option value="blocks">Blocks</option>
-            <option value="location">Location</option>
-            <option value="target">Target</option>
-          </select>
-          <button class="px-3 py-2 bg-green-600 text-white rounded-md mt-5 w-full" id="start">Find</button>
+          <p class="mt-5">
+            🎈 Crafted by
+            <a
+              href="https://github.com/hasssanezzz"
+              class="underline text-blue-500"
+              >Hassan Ezz</a
+            >
+          </p>
         </div>
-
-        <div>
-          <form id="form">
-            <label>Cell count per row</label>
-            <input id="size" type="number" max="30" min="5" value="13" class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md" />
-            <button class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full" id="start">Reset</button>
-          </form>
-        </div>
-
-
-
-        <p class="mt-5">🎈 Crafted by <a href="https://github.com/hasssanezzz" class="underline text-blue-500">Hassan
-            Ezz</a></p>
       </div>
+
+      <div
+        id="grid"
+        class="flex-auto grid grid-cols-5 border border-black"
+      ></div>
     </div>
-
-    <div id="grid" class="flex-auto grid grid-cols-5 border border-black">
-
-    </div>
-
-  </div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
