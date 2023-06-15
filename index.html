@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visual maze solver - by Hassan Ezz</title>
-  </head>
 
-  <body>
-    <div
-      id="app"
-      class="p-10 max-w-[1224px] m-auto flex lg:flex-row flex-col gap-10"
-    >
-      <div>
-        <h1 class="text-6xl text-center mb-5">Maze solver</h1>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual maze solver - by Hassan Ezz</title>
+</head>
 
-        <div class="mb-5 space-y-5">
-          <div class="w-80">
+<body>
+  <div id="app" class="p-10 max-w-[1224px] m-auto flex lg:flex-row flex-col gap-10">
+
+    <div>
+      <h1 class="text-6xl text-center mb-5 max-w-[100px]">Maze solver</h1>
+
+      <div class="mb-5 space-y-5">
+        <div class="space-y-3 w-full">
+          <div>
             <label for="">Fill mode</label>
             <select id="mode" class="bg-gray-300 w-full px-3 py-2 rounded-md">
               <option value="blocks">Blocks</option>
               <option value="location">Location</option>
               <option value="target">Target</option>
             </select>
+          </div>
 
+          <div>
             <label for="algorithm">Solving algorithm:</label>
-            <select
-              id="algorithm"
-              class="bg-gray-300 w-full px-3 py-2 rounded-md"
-            >
+            <select id="algorithm" class="bg-gray-300 w-full px-3 py-2 rounded-md">
               <option value="bfs">Breadth-first search</option>
               <option value="dijkstra">Dijkstra's algorithm</option>
               <option value="astar">A* search algorithm</option>
             </select>
-            <!-- select for astar heuristic -->
+          </div>
+
+          <div>
             <label id="heuristic-label" for="heuristic" class="hidden">Heuristic:</label>
-            <select
-              id="heuristic"
-              class="bg-gray-300 w-full px-3 py-2 rounded-md hidden"
-            >
+            <select id="heuristic" class="bg-gray-300 w-full px-3 py-2 rounded-md hidden">
               <option value="0">Manhattan distance</option>
               <option value="1">Diagonal distance</option>
               <option value="2">Euclidean distance</option>
@@ -49,51 +47,35 @@
               </option>
               <option value="6">Minkowski distance</option>
             </select>
-
-            <button
-              class="px-3 py-2 bg-green-600 text-white rounded-md mt-5 w-full"
-              id="start"
-            >
-              Find
-            </button>
           </div>
 
-          <div>
-            <form id="form">
-              <label>Cell count per row</label>
-              <input
-                id="size"
-                type="number"
-                max="30"
-                min="5"
-                value="13"
-                class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md"
-              />
-              <button
-                class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full"
-                id="start"
-              >
-                Reset
-              </button>
-            </form>
-          </div>
 
-          <p class="mt-5">
-            🎈 Crafted by
-            <a
-              href="https://github.com/hasssanezzz"
-              class="underline text-blue-500"
-              >Hassan Ezz</a
-            >
-          </p>
+          <button class="px-3 py-2 bg-green-600 text-white rounded-md mt-5 w-full" id="start">
+            Find
+          </button>
         </div>
-      </div>
 
-      <div
-        id="grid"
-        class="flex-auto grid grid-cols-5 border border-black"
-      ></div>
+        <div>
+          <form id="form">
+            <label>Cell count per row</label>
+            <input id="size" type="number" max="30" min="5" value="13"
+              class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md" />
+            <button class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full" id="start">
+              Reset
+            </button>
+          </form>
+        </div>
+
+        <p class="mt-5">
+          🎈 Crafted by
+          <a href="https://github.com/hasssanezzz" class="underline text-blue-500">Hassan Ezz</a> and <a href="https://github.com/massoudsalem" class="underline text-blue-500">Mohamed Massoud</a>
+        </p>
+      </div>
     </div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+    <div id="grid" class="flex-auto grid grid-cols-5 border border-black"></div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
