@@ -1,4 +1,4 @@
-import { DEFAULT_SIZE, MAX_SIZE } from "./constants"
+import { DEFAULT_SIZE, MAX_SIZE, PATH_COLOR, TARGET_LOCATION_COLOR } from "./constants"
 import {
   Pair,
   getShortestPath,
@@ -32,9 +32,11 @@ function main(size = DEFAULT_SIZE) {
         const isLocation = location.first === i && location.second === j
         const isTarget = target.first === i && target.second === j
 
-        grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box ${
-          blocks[i][j] ? "bg-black" : (isLocation || isTarget) ? "bg-[#0080ff]" : ""
-        }">${isLocation ? "A" : isTarget ? "B" : ""}</button>`
+        grid!.innerHTML += `
+          <button id="c-${i}-${j}" i="${i}" j="${j}" class="box" style="background: ${blocks[i][j] ? "black" : (isLocation || isTarget) ? TARGET_LOCATION_COLOR : ""}">
+            ${isLocation ? "A" : isTarget ? "B" : ""}
+          </button>
+        `
       }
     }
 
@@ -69,7 +71,7 @@ function main(size = DEFAULT_SIZE) {
           document.getElementById(`c-${location.first}-${location.second}`)!.innerText = ""
           location.first = i
           location.second = j
-          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = "#0080ff"
+          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = TARGET_LOCATION_COLOR
           document.getElementById(`c-${location.first}-${location.second}`)!.innerText = "A"
         }
 
@@ -83,7 +85,7 @@ function main(size = DEFAULT_SIZE) {
           document.getElementById(`c-${target.first}-${target.second}`)!.innerText = ""
           target.first = i
           target.second = j
-          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = "#0080ff"
+          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = TARGET_LOCATION_COLOR
           document.getElementById(`c-${target.first}-${target.second}`)!.innerText = "B"
         }
       })
@@ -140,7 +142,7 @@ function main(size = DEFAULT_SIZE) {
         )
           document.getElementById(
             `c-${pair.first}-${pair.second}`
-          )!.style.backgroundColor = "rgb(239 68 68)"
+          )!.style.backgroundColor = PATH_COLOR
       })
     else alert("No solutions found")
   })

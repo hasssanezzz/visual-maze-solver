@@ -1,4 +1,4 @@
-import { DELAY } from '../constants'
+import { DELAY, VISITED_CELL_COLOR } from '../constants'
 import { Pair, make2dArray } from '.'
 
 async function sleep(time = DELAY) {
@@ -17,7 +17,7 @@ export async function getShortestPath(
   const isSafe = (x: number, y: number) =>
     x < size && y < size && x >= 0 && y >= 0 && !blocks[x][y]
 
-  const setBoxColor = (i: number, j: number, color = 'yellow') => {
+  const setBoxColor = (i: number, j: number, color = VISITED_CELL_COLOR) => {
     if (
       (start.first != i || start.second != j) &&
       (end.first != i || end.second != j)
