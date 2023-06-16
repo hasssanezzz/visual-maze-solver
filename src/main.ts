@@ -33,7 +33,7 @@ function main(size = DEFAULT_SIZE) {
         const isTarget = target.first === i && target.second === j
 
         grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box ${
-          blocks[i][j] ? "bg-black" : (isLocation || isTarget) ? "bg-[green]" : ""
+          blocks[i][j] ? "bg-black" : (isLocation || isTarget) ? "bg-[#0080ff]" : ""
         }">${isLocation ? "A" : isTarget ? "B" : ""}</button>`
       }
     }
@@ -69,7 +69,7 @@ function main(size = DEFAULT_SIZE) {
           document.getElementById(`c-${location.first}-${location.second}`)!.innerText = ""
           location.first = i
           location.second = j
-          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = "green"
+          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = "#0080ff"
           document.getElementById(`c-${location.first}-${location.second}`)!.innerText = "A"
         }
 
@@ -83,7 +83,7 @@ function main(size = DEFAULT_SIZE) {
           document.getElementById(`c-${target.first}-${target.second}`)!.innerText = ""
           target.first = i
           target.second = j
-          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = "green"
+          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = "#0080ff"
           document.getElementById(`c-${target.first}-${target.second}`)!.innerText = "B"
         }
       })
@@ -140,7 +140,7 @@ function main(size = DEFAULT_SIZE) {
         )
           document.getElementById(
             `c-${pair.first}-${pair.second}`
-          )!.style.backgroundColor = "red"
+          )!.style.backgroundColor = "rgb(239 68 68)"
       })
     else alert("No solutions found")
   })

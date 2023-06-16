@@ -12,22 +12,22 @@
   <div id="app" class="p-10 max-w-[1224px] m-auto flex lg:flex-row flex-col gap-10">
 
     <div>
-      <h1 class="text-6xl text-center mb-5 max-w-[100px]">Maze solver</h1>
+      <h1 class="text-6xl text-center lg:text-left mb-5">Maze solver</h1>
 
       <div class="mb-5 space-y-5">
         <div class="space-y-3 w-full">
           <div>
             <label for="">Fill mode</label>
-            <select id="mode" class="bg-gray-300 w-full px-3 py-2 rounded-md">
+            <select id="mode" class="border-2 shadow w-full px-3 py-2 rounded-md mt-2 outline-blue-500">
               <option value="blocks">Blocks</option>
               <option value="location">Location</option>
               <option value="target">Target</option>
             </select>
           </div>
 
-          <div>
+          <div class="space-y-3">
             <label for="algorithm">Solving algorithm:</label>
-            <select id="algorithm" class="bg-gray-300 w-full px-3 py-2 rounded-md">
+            <select id="algorithm" class="border-2 shadow w-full px-3 py-2 rounded-md mt-2 outline-blue-500">
               <option value="bfs">Breadth-first search</option>
               <option value="dijkstra">Dijkstra's algorithm</option>
               <option value="astar">A* search algorithm</option>
@@ -36,7 +36,7 @@
 
           <div>
             <label id="heuristic-label" for="heuristic" class="hidden">Heuristic:</label>
-            <select id="heuristic" class="bg-gray-300 w-full px-3 py-2 rounded-md hidden">
+            <select id="heuristic" class="border-2 shadow w-full px-3 py-2 rounded-md mt-2 outline-blue-500 hidden">
               <option value="0">Manhattan distance</option>
               <option value="1">Diagonal distance</option>
               <option value="2">Euclidean distance</option>
@@ -50,7 +50,9 @@
           </div>
 
 
-          <button class="px-3 py-2 bg-green-600 text-white rounded-md mt-5 w-full" id="start">
+          <button
+            class="px-3 py-2 bg-green-500 text-white rounded-md mt-7 w-full font-semibold shadow-md shadow-green-400"
+            id="start">
             Find
           </button>
         </div>
@@ -59,16 +61,32 @@
           <form id="form">
             <label>Cell count per row</label>
             <input id="size" type="number" max="30" min="5" value="13"
-              class="w-100 bg-gray-300 w-full px-3 py-2 rounded-md" />
-            <button class="px-3 py-2 bg-blue-500 text-white rounded-md mt-5 w-full" id="start">
+              class="border-2 shadow w-full px-3 py-2 rounded-md mt-2 outline-blue-500" />
+            <button
+              class="px-3 py-2 bg-red-500 text-white rounded-md mt-5 w-full font-semibold shadow-md shadow-red-400"
+              id="start">
               Reset
             </button>
           </form>
         </div>
 
+
+        <a href="https://github.com/hasssanezzz/visual-maze-solver"
+          class="bg-gray-800 hover:bg-gray-600 font-bold text-white flex items-center gap-3 px-8 py-3 justify-center rounded-md shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-github">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+          <span>Source code</span>
+        </a>
+
         <p class="mt-5">
           🎈 Crafted by
-          <a href="https://github.com/hasssanezzz" class="underline text-blue-500">Hassan Ezz</a> and <a href="https://github.com/massoudsalem" class="underline text-blue-500">Mohamed Massoud</a>
+          <a href="https://github.com/hasssanezzz" class="underline text-blue-500">Hassan Ezz</a> and <a
+            href="https://github.com/massoudsalem" class="underline text-blue-500">Mohamed Massoud</a>
         </p>
       </div>
     </div>
