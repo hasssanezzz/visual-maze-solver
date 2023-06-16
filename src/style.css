@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .box {
-  @apply transition-all duration-200
+  @apply transition-all duration-200 aspect-square text-white font-bold border border-black leading-[0]
 }
