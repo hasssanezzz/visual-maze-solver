@@ -1,20 +1,20 @@
-import { DEFAULT_SIZE, MAX_SIZE } from './constants'
+import { DEFAULT_SIZE, MAX_SIZE } from "./constants"
 import {
   Pair,
   getShortestPath,
   getShortestPathDijkstra,
   getShortestPathAstar,
-} from './helpers'
-import { make2dArray } from './helpers'
-import './style.css'
+} from "./helpers"
+import { make2dArray } from "./helpers"
+import "./style.css"
 
-let grid = document.getElementById('grid'),
-  select = document.getElementById('mode'),
-  algorithmSelectBox = document.getElementById('algorithm'),
-  startBtn = document.getElementById('start')
+let grid = document.getElementById("grid"),
+  select = document.getElementById("mode"),
+  algorithmSelectBox = document.getElementById("algorithm"),
+  startBtn = document.getElementById("start")
 
-let mode: 'blocks' | 'target' | 'location' = 'blocks',
-  algorithm: 'bfs' | 'dijkstra' | 'astar' = 'bfs'
+let mode: "blocks" | "target" | "location" = "blocks",
+  algorithm: "bfs" | "dijkstra" | "astar" = "bfs"
 
 function main(size = DEFAULT_SIZE) {
   const blocks = make2dArray(size, false)
@@ -26,94 +26,101 @@ function main(size = DEFAULT_SIZE) {
     location = new Pair(0, 0)
 
   function render() {
-    grid!.innerHTML = ''
+    grid!.innerHTML = ""
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
         const isLocation = location.first === i && location.second === j
         const isTarget = target.first === i && target.second === j
-        grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box aspect-square text-white font-bold border border-black ${
-          blocks[i][j] ? 'bg-black' : (isLocation || isTarget) && 'bg-green-600'
-        }">${isLocation ? 'A' : isTarget ? 'B' : ''}</button>`
+
+        grid!.innerHTML += `<button id="c-${i}-${j}" i="${i}" j="${j}" class="box ${
+          blocks[i][j] ? "bg-black" : (isLocation || isTarget) ? "bg-[green]" : ""
+        }">${isLocation ? "A" : isTarget ? "B" : ""}</button>`
       }
     }
 
-    document.querySelectorAll('.box').forEach((box) => {
-      box.addEventListener('click', () => {
+    document.querySelectorAll(".box").forEach((box) => {
+      box.addEventListener("click", () => {
         if (isSolved) {
           render()
           isSolved = false
         }
 
-        const i = +box.getAttribute('i')!,
-          j = +box.getAttribute('j')!
+        const i = +box.getAttribute("i")!,
+          j = +box.getAttribute("j")!
 
         // preventing collision with target and location positions
         if (
-          mode === 'blocks' &&
+          mode === "blocks" &&
           (location.first !== i || location.second !== j) &&
           (target.first !== i || target.second !== j)
         ) {
           blocks[i][j] = !blocks[i][j]
           document.getElementById(`c-${i}-${j}`)!.style.backgroundColor =
-            blocks[i][j] ? 'black' : 'white'
+            blocks[i][j] ? "black" : "white"
         }
 
         // preventing collision with blocks and target positions
         if (
-          mode === 'location' &&
+          mode === "location" &&
           !blocks[i][j] &&
           (target.first !== i || target.second !== j)
         ) {
+          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = "white"
+          document.getElementById(`c-${location.first}-${location.second}`)!.innerText = ""
           location.first = i
           location.second = j
-          render()
+          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = "green"
+          document.getElementById(`c-${location.first}-${location.second}`)!.innerText = "A"
         }
 
         // preventing collision with blocks and location positions
         if (
-          mode === 'target' &&
+          mode === "target" &&
           !blocks[i][j] &&
           (location.first !== i || location.second !== j)
         ) {
+          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = "white"
+          document.getElementById(`c-${target.first}-${target.second}`)!.innerText = ""
           target.first = i
           target.second = j
-          render()
+          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = "green"
+          document.getElementById(`c-${target.first}-${target.second}`)!.innerText = "B"
         }
       })
     })
   }
 
-  select!.addEventListener('change', () => {
-    mode = (<HTMLSelectElement>document.getElementById('mode')).value as
-      | 'blocks'
-      | 'target'
-      | 'location'
+  select!.addEventListener("change", () => {
+    mode = (<HTMLSelectElement>document.getElementById("mode")).value as
+      | "blocks"
+      | "target"
+      | "location"
   })
 
-  algorithmSelectBox!.addEventListener('change', () => {
+  algorithmSelectBox!.addEventListener("change", () => {
     algorithm = (<HTMLSelectElement>algorithmSelectBox).value as
-      | 'bfs'
-      | 'dijkstra'
-      | 'astar'
+      | "bfs"
+      | "dijkstra"
+      | "astar"
 
     // show the a* options and remove them if not selected
-    if (algorithm === 'astar') {
-      document.querySelector('#heuristic')!.classList.remove('hidden')
-      document.querySelector('#heuristic-label')!.classList.remove('hidden')
+    if (algorithm === "astar") {
+      document.querySelector("#heuristic")!.classList.remove("hidden")
+      document.querySelector("#heuristic-label")!.classList.remove("hidden")
     } else {
-      document.querySelector('#heuristic')!.classList.add('hidden')
-      document.querySelector('#heuristic-label')!.classList.add('hidden')
+      document.querySelector("#heuristic")!.classList.add("hidden")
+      document.querySelector("#heuristic-label")!.classList.add("hidden")
     }
   })
 
-  startBtn?.addEventListener('click', async () => {
+  startBtn?.addEventListener("click", async () => {
     isSolved = true
     render()
 
     const selectedAlgorithm =
-      algorithm === 'bfs'
+      algorithm === "bfs"
         ? getShortestPath
-        : algorithm === 'dijkstra'
+        : algorithm === "dijkstra"
         ? getShortestPathDijkstra
         : getShortestPathAstar
 
@@ -133,9 +140,9 @@ function main(size = DEFAULT_SIZE) {
         )
           document.getElementById(
             `c-${pair.first}-${pair.second}`
-          )!.style.backgroundColor = 'red'
+          )!.style.backgroundColor = "red"
       })
-    else alert('No solutions found')
+    else alert("No solutions found")
   })
 
   render()
@@ -144,13 +151,13 @@ function main(size = DEFAULT_SIZE) {
 main(DEFAULT_SIZE)
 
 function syncSizeForm() {
-  const input = <HTMLInputElement>document.getElementById('size')
+  const input = <HTMLInputElement>document.getElementById("size")
   input.value = DEFAULT_SIZE.toString()
   input.max = MAX_SIZE.toString()
 
-  document.getElementById('form')?.addEventListener('submit', (e) => {
+  document.getElementById("form")?.addEventListener("submit", (e) => {
     e.preventDefault()
-    const sizeInput = (<HTMLInputElement>document.getElementById('size')).value
+    const sizeInput = (<HTMLInputElement>document.getElementById("size")).value
 
     // recreate the button to remove event listeners
     let newBtn = startBtn!.cloneNode(true)
