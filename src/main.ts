@@ -1,9 +1,15 @@
-import { DEFAULT_SIZE, MAX_SIZE, PATH_COLOR, TARGET_LOCATION_COLOR } from "./constants"
+import {
+  DEFAULT_SIZE,
+  MAX_SIZE,
+  PATH_COLOR,
+  TARGET_LOCATION_COLOR,
+} from "./constants"
 import {
   Pair,
   getShortestPath,
   getShortestPathDijkstra,
   getShortestPathAstar,
+  sleep,
 } from "./helpers"
 import { make2dArray } from "./helpers"
 import "./style.css"
@@ -33,7 +39,13 @@ function main(size = DEFAULT_SIZE) {
         const isTarget = target.first === i && target.second === j
 
         grid!.innerHTML += `
-          <button id="c-${i}-${j}" i="${i}" j="${j}" class="box" style="background: ${blocks[i][j] ? "black" : (isLocation || isTarget) ? TARGET_LOCATION_COLOR : ""}">
+          <button id="c-${i}-${j}" i="${i}" j="${j}" class="box" style="background: ${
+          blocks[i][j]
+            ? "black"
+            : isLocation || isTarget
+            ? TARGET_LOCATION_COLOR
+            : ""
+        }">
             ${isLocation ? "A" : isTarget ? "B" : ""}
           </button>
         `
@@ -67,12 +79,20 @@ function main(size = DEFAULT_SIZE) {
           !blocks[i][j] &&
           (target.first !== i || target.second !== j)
         ) {
-          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = "white"
-          document.getElementById(`c-${location.first}-${location.second}`)!.innerText = ""
+          document.getElementById(
+            `c-${location.first}-${location.second}`
+          )!.style.backgroundColor = "white"
+          document.getElementById(
+            `c-${location.first}-${location.second}`
+          )!.innerText = ""
           location.first = i
           location.second = j
-          document.getElementById(`c-${location.first}-${location.second}`)!.style.backgroundColor = TARGET_LOCATION_COLOR
-          document.getElementById(`c-${location.first}-${location.second}`)!.innerText = "A"
+          document.getElementById(
+            `c-${location.first}-${location.second}`
+          )!.style.backgroundColor = TARGET_LOCATION_COLOR
+          document.getElementById(
+            `c-${location.first}-${location.second}`
+          )!.innerText = "A"
         }
 
         // preventing collision with blocks and location positions
@@ -81,12 +101,20 @@ function main(size = DEFAULT_SIZE) {
           !blocks[i][j] &&
           (location.first !== i || location.second !== j)
         ) {
-          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = "white"
-          document.getElementById(`c-${target.first}-${target.second}`)!.innerText = ""
+          document.getElementById(
+            `c-${target.first}-${target.second}`
+          )!.style.backgroundColor = "white"
+          document.getElementById(
+            `c-${target.first}-${target.second}`
+          )!.innerText = ""
           target.first = i
           target.second = j
-          document.getElementById(`c-${target.first}-${target.second}`)!.style.backgroundColor = TARGET_LOCATION_COLOR
-          document.getElementById(`c-${target.first}-${target.second}`)!.innerText = "B"
+          document.getElementById(
+            `c-${target.first}-${target.second}`
+          )!.style.backgroundColor = TARGET_LOCATION_COLOR
+          document.getElementById(
+            `c-${target.first}-${target.second}`
+          )!.innerText = "B"
         }
       })
     })
@@ -133,8 +161,10 @@ function main(size = DEFAULT_SIZE) {
       size
     )
 
-    if (sol)
-      sol.forEach(async (pair) => {
+    if (sol) {
+      for (const pair of sol) {
+        await sleep(50)
+
         // preventing location and target from getting colored red
         if (
           (pair.first != target.first || pair.second != target.second) &&
@@ -143,8 +173,8 @@ function main(size = DEFAULT_SIZE) {
           document.getElementById(
             `c-${pair.first}-${pair.second}`
           )!.style.backgroundColor = PATH_COLOR
-      })
-    else alert("No solutions found")
+      }
+    } else alert("No solutions found")
   })
 
   render()

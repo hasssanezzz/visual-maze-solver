@@ -1,12 +1,8 @@
-import { DELAY, VISITED_CELL_COLOR } from '../constants'
-import { Pair, make2dArray } from '.'
+import { VISITED_CELL_COLOR } from '../constants'
+import { Pair, make2dArray, sleep } from '.'
 import { PriorityQueue } from 'datastructures-js'
 
 //TODO: implement dijkstra finding all shortest paths
-
-async function sleep(time = DELAY) {
-  await new Promise((r) => setTimeout(r, time))
-}
 
 export async function getShortestPathDijkstra(
   start: Pair,

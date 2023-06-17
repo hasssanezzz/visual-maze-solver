@@ -1,9 +1,5 @@
-import { DELAY, VISITED_CELL_COLOR } from '../constants'
-import { Pair, make2dArray } from '.'
-
-async function sleep(time = DELAY) {
-  await new Promise((r) => setTimeout(r, time))
-}
+import { VISITED_CELL_COLOR } from '../constants'
+import { Pair, make2dArray, sleep } from '.'
 
 export async function getShortestPath(
   start: Pair,

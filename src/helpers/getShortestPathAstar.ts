@@ -1,10 +1,6 @@
-import { DELAY, VISITED_CELL_COLOR } from '../constants'
-import { Pair, make2dArray } from '.'
-import { PriorityQueue } from 'datastructures-js'
-
-async function sleep(time = DELAY) {
-  await new Promise((r) => setTimeout(r, time))
-}
+import { VISITED_CELL_COLOR } from "../constants"
+import { Pair, make2dArray, sleep } from "."
+import { PriorityQueue } from "datastructures-js"
 
 export async function getShortestPathAstar(
   start: Pair,
@@ -12,9 +8,9 @@ export async function getShortestPathAstar(
   blocks: boolean[][],
   size: number
 ) {
-  const selectedHeuristic = 
-    +(<HTMLSelectElement>document.getElementById('heuristic')).value
-  
+  const selectedHeuristic = +(<HTMLSelectElement>(
+    document.getElementById("heuristic")
+  )).value
 
   const isSafe = (x: number, y: number) =>
     x < size && y < size && x >= 0 && y >= 0 && !blocks[x][y]
@@ -56,7 +52,7 @@ export async function getShortestPathAstar(
       const f2 = distance[b.first][b.second] + heuristic(b, end)
       return f1 - f2
     }) as PriorityQueue<Pair>
-    
+
     q.push(start)
 
     while (q.size() > 0) {
