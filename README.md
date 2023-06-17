@@ -2,6 +2,8 @@
 
 A maze solving visualizer, using the BFS algorithm.
 
+![GIF Preview](./public/preview.gif)
+
 ## Settings
 
 In the constants file, you can find two settings,
