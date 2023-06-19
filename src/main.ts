@@ -163,7 +163,7 @@ function main(size = DEFAULT_SIZE) {
 
     if (sol) {
       for (const pair of sol) {
-        await sleep(50)
+        await sleep(10)
 
         // preventing location and target from getting colored red
         if (
@@ -174,7 +174,7 @@ function main(size = DEFAULT_SIZE) {
 
           cell.style.animation = `none`
           cell.offsetWidth // Trigger a reflow
-          cell.style.animation = `cellVisited 1s`
+          cell.style.animation = `cellVisited 1.5s`
           cell.style.backgroundColor = PATH_COLOR
         }
       }

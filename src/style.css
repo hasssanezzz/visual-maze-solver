@@ -8,17 +8,13 @@
 
 @keyframes cellVisited {
   0% {
-    transform: scale(1.1);
-    border-width: 2px;
-    @apply bg-[#0080ff]
+    transform: scale(1.2);
+    @apply bg-[#0080ff] rounded border-2
   }
   50% {
-    transform: scale(0.8);
-    /* border-width: 0; */
+    transform: scale(0.7);
   }
   100% {
     transform: scale(1);
-    border-width: 1px;
-    border-radius: 0;
   }
 }
