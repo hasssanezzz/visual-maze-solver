@@ -1,5 +1,4 @@
-import { VISITED_CELL_COLOR } from '../constants'
-import { Pair, make2dArray, sleep } from '.'
+import { Pair, make2dArray, setCellColor, sleep } from '.'
 import { PriorityQueue } from 'datastructures-js'
 
 //TODO: implement dijkstra finding all shortest paths
@@ -12,14 +11,6 @@ export async function getShortestPathDijkstra(
 ) {
   const isSafe = (x: number, y: number) =>
     x < size && y < size && x >= 0 && y >= 0 && !blocks[x][y]
-
-  const setBoxColor = (i: number, j: number, color = VISITED_CELL_COLOR) => {
-    if (
-      (start.first != i || start.second != j) &&
-      (end.first != i || end.second != j)
-    )
-      document.getElementById(`c-${i}-${j}`)!.style.backgroundColor = color
-  }
 
   function getNeighbors(p: Pair): Pair[] {
     const neighbors: Pair[] = []
@@ -67,7 +58,11 @@ export async function getShortestPathDijkstra(
 
       visited[p.first][p.second] = true
 
-      setBoxColor(p.first, p.second)
+      if (
+        (start.first != p.first || start.second != p.second) &&
+        (end.first != p.first || end.second != p.second)
+      )
+        setCellColor(p.first, p.second)
 
       if (p.first === end.first && p.second === end.second) {
         isSolvable = true
