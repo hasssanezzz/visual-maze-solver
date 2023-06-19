@@ -15,6 +15,7 @@ export async function sleep(time = DELAY) {
 }
 
 export function setCellColor(i: number, j: number, color = VISITED_CELL_COLOR) {
+  document.getElementById(`c-${i}-${j}`)!.style.animation = `cellVisited 0.5s forwards`
   document.getElementById(`c-${i}-${j}`)!.style.backgroundColor = color
 }
 

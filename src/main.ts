@@ -39,7 +39,7 @@ function main(size = DEFAULT_SIZE) {
         const isTarget = target.first === i && target.second === j
 
         grid!.innerHTML += `
-          <button id="c-${i}-${j}" i="${i}" j="${j}" class="box" style="background: ${
+          <button id="c-${i}-${j}" i="${i}" j="${j}" class="cell" style="background: ${
           blocks[i][j]
             ? "black"
             : isLocation || isTarget
@@ -52,15 +52,15 @@ function main(size = DEFAULT_SIZE) {
       }
     }
 
-    document.querySelectorAll(".box").forEach((box) => {
-      box.addEventListener("click", () => {
+    document.querySelectorAll(".cell").forEach((cell) => {
+      cell.addEventListener("click", () => {
         if (isSolved) {
           render()
           isSolved = false
         }
 
-        const i = +box.getAttribute("i")!,
-          j = +box.getAttribute("j")!
+        const i = +cell.getAttribute("i")!,
+          j = +cell.getAttribute("j")!
 
         // preventing collision with target and location positions
         if (
@@ -169,10 +169,14 @@ function main(size = DEFAULT_SIZE) {
         if (
           (pair.first != target.first || pair.second != target.second) &&
           (pair.first != location.first || pair.second != location.second)
-        )
-          document.getElementById(
-            `c-${pair.first}-${pair.second}`
-          )!.style.backgroundColor = PATH_COLOR
+        ) {
+          const cell = document.getElementById(`c-${pair.first}-${pair.second}`)!
+
+          cell.style.animation = `none`
+          cell.offsetWidth // Trigger a reflow
+          cell.style.animation = `cellVisited 1s`
+          cell.style.backgroundColor = PATH_COLOR
+        }
       }
     } else alert("No solutions found")
   })
