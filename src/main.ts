@@ -39,12 +39,10 @@ function main(size = DEFAULT_SIZE) {
         const isTarget = target.first === i && target.second === j
 
         grid!.innerHTML += `
-          <button id="c-${i}-${j}" i="${i}" j="${j}" class="cell" style="background: ${
-          blocks[i][j]
-            ? "black"
-            : isLocation || isTarget
-            ? TARGET_LOCATION_COLOR
-            : ""
+          <button id="c-${i}-${j}" i="${i}" j="${j}" class="cell ${
+          blocks[i][j] ? "blocked" : ""
+        }" style="background: ${
+          isLocation || isTarget ? TARGET_LOCATION_COLOR : ""
         }">
             ${isLocation ? "A" : isTarget ? "B" : ""}
           </button>
@@ -69,8 +67,10 @@ function main(size = DEFAULT_SIZE) {
           (target.first !== i || target.second !== j)
         ) {
           blocks[i][j] = !blocks[i][j]
-          document.getElementById(`c-${i}-${j}`)!.style.backgroundColor =
-            blocks[i][j] ? "black" : "white"
+          if(blocks[i][j])
+            document.getElementById(`c-${i}-${j}`)!.classList.add("blocked")
+          else
+            document.getElementById(`c-${i}-${j}`)!.classList.remove("blocked")
         }
 
         // preventing collision with blocks and target positions
@@ -170,7 +170,9 @@ function main(size = DEFAULT_SIZE) {
           (pair.first != target.first || pair.second != target.second) &&
           (pair.first != location.first || pair.second != location.second)
         ) {
-          const cell = document.getElementById(`c-${pair.first}-${pair.second}`)!
+          const cell = document.getElementById(
+            `c-${pair.first}-${pair.second}`
+          )!
 
           cell.style.animation = `none`
           cell.offsetWidth // Trigger a reflow
