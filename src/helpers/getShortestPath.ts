@@ -1,13 +1,14 @@
 import { Pair, make2dArray, setCellColor, sleep } from "."
+import { dx_4d, dx_8d, dy_4d, dy_8d } from "../constants"
 
 export async function getShortestPath(
   start: Pair,
   end: Pair,
   blocks: boolean[][],
-  size: number
+  size: number,
+  directions: 4 | 8 = 4
 ) {
-  const dx = [-1, 1, 0, 0]
-  const dy = [0, 0, 1, -1]
+
 
   const isSafe = (x: number, y: number) =>
     x < size && y < size && x >= 0 && y >= 0 && !blocks[x][y]
@@ -46,9 +47,9 @@ export async function getShortestPath(
         break
       }
 
-      for (let i = 0; i < 4; i++) {
-        const x = p.first + dx[i],
-          y = p.second + dy[i]
+      for (let i = 0; i < directions; i++) {
+        const x = p.first + (directions === 8 ? dx_8d[i] : dx_4d[i]),
+          y = p.second + (directions === 8 ? dy_8d[i] : dy_4d[i])
 
         if (isSafe(x, y) && !visited[x][y]) {
           distance[x][y] = distance[p.first][p.second] + 1

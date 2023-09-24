@@ -1,5 +1,6 @@
 import { Pair, make2dArray, setCellColor, sleep } from '.'
 import { PriorityQueue } from 'datastructures-js'
+import { dx_4d, dx_8d, dy_4d, dy_8d } from "../constants"
 
 //TODO: implement dijkstra finding all shortest paths
 
@@ -7,19 +8,17 @@ export async function getShortestPathDijkstra(
   start: Pair,
   end: Pair,
   blocks: boolean[][],
-  size: number
+  size: number,
+  directions: 4 | 8 = 8
 ) {
   const isSafe = (x: number, y: number) =>
     x < size && y < size && x >= 0 && y >= 0 && !blocks[x][y]
 
   function getNeighbors(p: Pair): Pair[] {
     const neighbors: Pair[] = []
-    const dx = [0, 0, 1, -1]
-    const dy = [1, -1, 0, 0]
-
-    for (let i = 0; i < 4; i++) {
-      const x = p.first + dx[i]
-      const y = p.second + dy[i]
+    for (let i = 0; i < directions; i++) {
+      const x = p.first + (directions === 8 ? dx_8d[i] : dx_4d[i]),
+          y = p.second + (directions === 8 ? dy_8d[i] : dy_4d[i])
 
       if (isSafe(x, y)) {
         neighbors.push(new Pair(x, y))

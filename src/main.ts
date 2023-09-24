@@ -147,6 +147,11 @@ function main(size = DEFAULT_SIZE) {
     isSolved = true
     render()
 
+
+    const directions =  (<HTMLSelectElement>document.getElementById("directions")).value
+
+    console.log(directions)
+
     const selectedAlgorithm =
       algorithm === "bfs"
         ? getShortestPath
@@ -158,7 +163,8 @@ function main(size = DEFAULT_SIZE) {
       new Pair(location.first, location.second),
       new Pair(target.first, target.second),
       blocks,
-      size
+      size,
+      directions == '4' ? 4 : 8
     )
 
     if (sol) {

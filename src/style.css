@@ -8,12 +8,12 @@
 
 .cell::after {
   content: '';
-  @apply absolute top-0 left-0 w-full h-full bg-black transform scale-0 transition-all duration-200 rotate-180 translate-y-[-50px]
+  @apply absolute top-0 left-0 w-full h-full bg-black transform scale-0 transition-all duration-200 translate-y-[-50px]
 }
 
 .cell::after.blocked {
   content: '';
-  @apply transform scale-100 rotate-0 translate-y-0
+  @apply transform scale-100 translate-y-0
 }
 
 @keyframes cellVisited {
