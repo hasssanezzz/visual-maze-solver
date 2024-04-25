@@ -49,6 +49,16 @@ function main(size = DEFAULT_SIZE) {
         `
       }
     }
+    
+    let isMouseDown = false
+
+    document.addEventListener("mousedown", () => {
+      isMouseDown = true
+    })
+
+    document.addEventListener("mouseup", () => {
+      isMouseDown = false
+    })
 
     document.querySelectorAll(".cell").forEach((cell) => {
       cell.addEventListener("click", () => {
@@ -67,7 +77,7 @@ function main(size = DEFAULT_SIZE) {
           (target.first !== i || target.second !== j)
         ) {
           blocks[i][j] = !blocks[i][j]
-          if(blocks[i][j])
+          if (blocks[i][j])
             document.getElementById(`c-${i}-${j}`)!.classList.add("blocked")
           else
             document.getElementById(`c-${i}-${j}`)!.classList.remove("blocked")
@@ -117,6 +127,70 @@ function main(size = DEFAULT_SIZE) {
           )!.innerText = "B"
         }
       })
+      cell.addEventListener("mouseover", () => {
+        if (!isMouseDown) return
+        if (isSolved) {
+          render()
+          isSolved = false
+        }
+
+        const i = +cell.getAttribute("i")!,
+          j = +cell.getAttribute("j")!
+
+        if (
+          mode === "blocks" &&
+          (location.first !== i || location.second !== j) &&
+          (target.first !== i || target.second !== j)
+        ) {
+          blocks[i][j] = !blocks[i][j]
+          if (blocks[i][j])
+            document.getElementById(`c-${i}-${j}`)!.classList.add("blocked")
+          else
+            document.getElementById(`c-${i}-${j}`)!.classList.remove("blocked")
+        }
+      })
+      cell.addEventListener("mousedown", () => {
+        if (isSolved) {
+          render()
+          isSolved = false
+        }
+
+        const i = +cell.getAttribute("i")!,
+          j = +cell.getAttribute("j")!
+
+        if (
+          mode === "blocks" &&
+          (location.first !== i || location.second !== j) &&
+          (target.first !== i || target.second !== j)
+        ) {
+          blocks[i][j] = !blocks[i][j]
+          if (blocks[i][j])
+            document.getElementById(`c-${i}-${j}`)!.classList.add("blocked")
+          else
+            document.getElementById(`c-${i}-${j}`)!.classList.remove("blocked")
+        }
+      })
+      cell.addEventListener("mouseup", () => {
+        if (isSolved) {
+          render()
+          isSolved = false
+        }
+
+        const i = +cell.getAttribute("i")!,
+          j = +cell.getAttribute("j")!
+
+        if (
+          mode === "blocks" &&
+          (location.first !== i || location.second !== j) &&
+          (target.first !== i || target.second !== j)
+        ) {
+          blocks[i][j] = !blocks[i][j]
+          if (blocks[i][j])
+            document.getElementById(`c-${i}-${j}`)!.classList.add("blocked")
+          else
+            document.getElementById(`c-${i}-${j}`)!.classList.remove("blocked")
+        }
+      })
     })
   }
 
@@ -147,8 +221,9 @@ function main(size = DEFAULT_SIZE) {
     isSolved = true
     render()
 
-
-    const directions =  (<HTMLSelectElement>document.getElementById("directions")).value
+    const directions = (<HTMLSelectElement>(
+      document.getElementById("directions")
+    )).value
 
     console.log(directions)
 
@@ -164,7 +239,7 @@ function main(size = DEFAULT_SIZE) {
       new Pair(target.first, target.second),
       blocks,
       size,
-      directions == '4' ? 4 : 8
+      directions == "4" ? 4 : 8
     )
 
     if (sol) {
